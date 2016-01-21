@@ -2,6 +2,9 @@ package main;
 
 import accounts.AccountService;
 import accounts.UserProfile;
+import dbService.DBException;
+import dbService.DBService;
+import dbService.dataSets.UsersDataSet;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -21,6 +24,17 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        DBService dbService = new DBService();
+        dbService.printConnectionInfo();
+        try {
+            long userId = dbService.addUser("tully");
+            System.out.println("Added user id: " + userId);
+            UsersDataSet dataSet = dbService.getUser(userId);
+            System.out.println("User data set: " + dataSet);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+/*
         AccountService accountService = new AccountService();
         accountService.addNewUser(new UserProfile("admin"));
         accountService.addNewUser(new UserProfile("test"));
@@ -36,12 +50,13 @@ public class Main {
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
 
+
         Server server = new Server(8080);
         server.setHandler(handlers);
 
         server.start();
         System.out.println("Server started");
         server.join();
-
+*/
     }
 }
