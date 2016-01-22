@@ -1,0 +1,10 @@
+dbService\DBException.class
+servlets\SignUpServlet.class
+dbService\dao\UsersDAO.class
+dbService\DBService.class
+servlets\SignInServlet.class
+accounts\AccountService.class
+main\Main.class
+accounts\UserProfile.class
+dbService\dataSets\UsersDataSet.class
+servlets\SessionsServlet.class

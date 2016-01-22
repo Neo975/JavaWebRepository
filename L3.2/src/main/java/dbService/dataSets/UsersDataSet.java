@@ -1,5 +1,7 @@
 package dbService.dataSets;
 
+import accounts.UserProfile;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -17,14 +19,24 @@ public class UsersDataSet implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", unique = true, updatable = false)
+    @Column(name = "login", unique = true, updatable = false)
     private String name;
 
-    @SuppressWarnings("UnusedDeclaration")
+    @Column(name = "password", unique = false, updatable = true)
+    private String password;
+
+    public UsersDataSet(UserProfile userProfile) {
+        this.setId(-1);
+        this.setName(userProfile.getLogin());
+        this.setPassword(userProfile.getPass());
+    }
+
+
+//    @SuppressWarnings("UnusedDeclaration")
     public UsersDataSet() {
 
     }
-
+/*
     @SuppressWarnings("UnusedDeclaration")
     public UsersDataSet(long id, String name) {
         this.setId(id);
@@ -35,14 +47,23 @@ public class UsersDataSet implements Serializable{
         this.setId(-1);
         this.setName(name);
     }
+*/
 
-    @SuppressWarnings("UnusedDeclaration")
+//    @SuppressWarnings("UnusedDeclaration")
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public long getId() {
@@ -57,6 +78,7 @@ public class UsersDataSet implements Serializable{
         return "UsersDataSet{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

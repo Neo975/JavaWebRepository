@@ -26,18 +26,19 @@ public class Main {
     public static void main(String[] args) throws Exception {
         DBService dbService = new DBService();
         dbService.printConnectionInfo();
+/*
         try {
-            long userId = dbService.addUser("tully");
+            long userId = dbService.addUser(new UserProfile("tully"));
             System.out.println("Added user id: " + userId);
-            UsersDataSet dataSet = dbService.getUser(userId);
+            UsersDataSet dataSet = dbService.getUser("tully");
             System.out.println("User data set: " + dataSet);
         } catch (DBException e) {
             e.printStackTrace();
         }
-/*
-        AccountService accountService = new AccountService();
-        accountService.addNewUser(new UserProfile("admin"));
-        accountService.addNewUser(new UserProfile("test"));
+*/
+        AccountService accountService = new AccountService(dbService);
+//        accountService.addNewUser(new UserProfile("admin"));
+//        accountService.addNewUser(new UserProfile("test"));
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
@@ -57,6 +58,6 @@ public class Main {
         server.start();
         System.out.println("Server started");
         server.join();
-*/
+
     }
 }

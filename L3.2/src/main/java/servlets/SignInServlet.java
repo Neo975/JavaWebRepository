@@ -2,6 +2,7 @@ package servlets;
 
 import accounts.AccountService;
 import accounts.UserProfile;
+import dbService.DBException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +30,9 @@ public class SignInServlet extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        System.out.println("------------------------------------------------------------------------------------------------");
+        System.out.println("ServletSignIn, login: " + login + ", password: " + password);
+        System.out.println("------------------------------------------------------------------------------------------------");
         if(login == null || password == null) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -40,7 +44,7 @@ public class SignInServlet extends HttpServlet{
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         } else {
             response.setContentType("text/html;charset=utf-8");
-            response.getWriter().println("Authorized");
+            response.getWriter().println("Authorized: " + login);
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
